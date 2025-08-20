@@ -418,6 +418,9 @@
     </div>
 
     <script>
+        // API Configuration with environment fallback
+        const API_URL = import.meta.env.VITE_API_URL || "https://api.dashkaenglish.swapoil.de";
+        const WS_URL = import.meta.env.VITE_WS_URL || "wss://api.dashkaenglish.swapoil.de";
         let currentRole = 'user';
         let isRecording = false;
         let recognition = null;
@@ -427,7 +430,7 @@
         // Конфигурация серверов - ИСПРАВЛЕННЫЕ URL
         const config = {
             aiServer: window.location.origin, // Используем текущий домен
-            wsServer: `ws://${window.location.hostname}:8765`, // WebSocket на порту 8765
+            wsServer: `wss://${window.location.hostname}:8765`, // WebSocket на порту 8765
             enableWebSocket: true,
             enableSpeech: true
         };
@@ -631,7 +634,7 @@
                 const fromLang = currentRole === 'user' ? 'RU' : 'EN';
                 const toLang = currentRole === 'user' ? 'EN' : 'RU';
 
-                const response = await fetch(`${config.aiServer}/translate`, {
+                const response = await fetch(`${API_URL}/translate`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -703,9 +706,9 @@
         async function checkAIServer() {
             try {
                 // Пробуем подключиться к API
-                const response = await fetch(`${config.aiServer}/api/health`);
+                const response = await fetch(`${API_URL}/health`);
                 if (response.ok) {
-                    const data = await response.json();
+                    const data = await response.json()
                     updateConnectionStatus('ai', true);
                     console.log('✅ AI Server connected:', data);
                 } else {
@@ -717,10 +720,10 @@
                 
                 // Пробуем альтернативные endpoints
                 try {
-                    const altResponse = await fetch(`${config.aiServer}/health`);
+                    const altResponse = await fetch(`${API_URL}/health`);
                     if (altResponse.ok) {
                         updateConnectionStatus('ai', true);
-                        console.log('✅ AI Server connected via /health');
+                        console.log('✅ AI Server connected via https://api.dashkaenglish.swapoil.de/health');
                     }
                 } catch (altError) {
                     console.error('❌ Alternative endpoint also failed:', altError);

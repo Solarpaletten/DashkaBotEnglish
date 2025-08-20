@@ -471,7 +471,7 @@ class DashkaBotNodeServer {
       // Запускаем сервер с WebSocket поддержкой
       this.server.listen(this.port, "0.0.0.0", () => {
         console.log('🚀 DashkaBot Cloud Server запущен!');
-        console.log(`🌍 URL: https://dashka-translate.onrender.com`);
+        console.log(`🌍 URL: https://dashkaenglish.swapoil.de`);
         console.log(`🔗 Port: ${this.port}`);
         console.log(`🔌 WebSocket: wss://dashka-translate.onrender.com/ws`);
         console.log(`📱 Ready for mobile browsers with WebSocket sync!`);
