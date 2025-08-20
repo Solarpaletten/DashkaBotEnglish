@@ -419,8 +419,8 @@
 
     <script>
         // API Configuration with environment fallback
-        const API_URL = import.meta.env.VITE_API_URL || "https://api.dashkaenglish.swapoil.de";
-        const WS_URL = import.meta.env.VITE_WS_URL || "wss://api.dashkaenglish.swapoil.de";
+        const API_URL = "https://api.dashkaenglish.swapoil.de";
+        const WS_URL = "wss://api.dashkaenglish.swapoil.de";
         let currentRole = 'user';
         let isRecording = false;
         let recognition = null;
@@ -429,7 +429,7 @@
 
         // Конфигурация серверов - ИСПРАВЛЕННЫЕ URL
         const config = {
-            aiServer: window.location.origin, // Используем текущий домен
+            aiServer: "https://api.dashkaenglish.swapoil.de", // Используем текущий домен
             wsServer: `wss://${window.location.hostname}:8765`, // WebSocket на порту 8765
             enableWebSocket: true,
             enableSpeech: true
